@@ -5,5 +5,9 @@
         <file>TestSwipeView.qml</file>
         <file>ComponentTest.qml</file>
         <file>ComponentCamera.qml</file>
+        <file>ButtonCaptureImage.qml</file>
+        <file>ButtonCaptureImageForm.ui.qml</file>
+        <file>icons/iconCamera.png</file>
+        <file>icons/iconCameraColored.png</file>
     </qresource>
 </RCC>

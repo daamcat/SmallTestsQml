@@ -33,5 +33,8 @@ Rectangle // Object declaration. Object of type Rectangle.
         fillMode: VideoOutput.PreserveAspectCrop
     }
 
+    ButtonCaptureImage {
+    }
+
 
 }
