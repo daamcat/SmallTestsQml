@@ -1,8 +1,13 @@
 // Ref: https://wiki.qt.io/QML_Application_Structuring_Approaches
 import QtQuick 2.0
 
-Rectangle
-{
+// "object declaration".
+Rectangle // "object type".
+{ // Everything between these curly braces are 1.attributes and 2.children of the object of type "Rectangle".
+
+    // "attributes" can be id, properties, signals, signal handlers, methods, attached properties nd
+    // attached signal handlers, and enumerations.
+
     width: parent.width
     height: parent.height
     color: "red"
@@ -17,6 +22,7 @@ Rectangle
         height: parent.height / 4
         font.pointSize: 20
         anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
         color: "yellow"
         text: qsTr("Component text")
     }

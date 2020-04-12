@@ -1,6 +1,8 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.1
+import QtMultimedia 5.13
+
 
 Window {
     id: idWindow
@@ -14,6 +16,20 @@ Window {
         id: view
         currentIndex: 1
         anchors.fill: parent
+
+        // "property change" signals: QML types emit signal anytime a property changes. So if you know
+        // the property name, you can create signal name: "on<Property_name>Changed"
+        onCurrentIndexChanged: {
+            if (view.currentItem == pageCamera)
+            {
+                componentCamera.aliasCameraState = Camera.ActiveState
+
+            }
+            else
+            {
+                componentCamera.aliasCameraState = Camera.LoadedState
+            }
+        }
 
         Item {
             id: firstPage
@@ -36,6 +52,13 @@ Window {
             ComponentTest {
                 color: "red"
                 textProperties.color: "cyan"
+            }
+        }
+        Item {
+            id: pageCamera
+            ComponentCamera {
+                id: componentCamera
+
             }
         }
     }

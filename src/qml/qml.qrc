@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>HelloQml.qml</file>
+        <file>TestSwipeView.qml</file>
+        <file>ComponentTest.qml</file>
+        <file>ComponentCamera.qml</file>
+    </qresource>
+</RCC>
