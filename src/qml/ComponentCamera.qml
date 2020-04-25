@@ -1,5 +1,8 @@
 import QtQuick 2.0
 import QtMultimedia 5.13
+import QtQml 2.10
+
+// "Component"s are defined with their files. We use "Type"s to create "component"s.
 
 Rectangle // Object declaration. Object of type Rectangle.
 {
@@ -12,6 +15,8 @@ Rectangle // Object declaration. Object of type Rectangle.
     // With property alias we create a direct reference to an existing property.
     property alias cameraProperties: camera
     property alias aliasCameraState: camera.cameraState
+
+    // "Camera" is a component to access device camera(s).
     Camera
     {
         // Some property attributes are read-write, and some are read-only.
@@ -25,16 +30,26 @@ Rectangle // Object declaration. Object of type Rectangle.
 
         // We want to be able to take photos with the camera. Hence we set captureMode:
         captureMode: Camera.CaptureStillImage
+
+        // To capture images:
+        imageCapture {
+            id: imageCaptureInCamera
+            onImageCaptured: {
+
+            }
+        }
     }
 
+    // "VideoOutput" component is used to display the stream captured by "Camera".
     VideoOutput {
+        id: videoOutput
         source: camera
         anchors.fill: parent
         fillMode: VideoOutput.PreserveAspectCrop
     }
 
+
     ButtonCaptureImage {
+
     }
-
-
 }
