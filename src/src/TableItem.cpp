@@ -23,12 +23,11 @@ int TableItem::columnCount() const
 }
 int TableItem::row()const
 {
-    if (!m_parentItem)
-        // If the item has no parent, it is root item, and its row is zero. Model will never ask for this!
+    if (m_parentItem)
     {
-        return 0;
+        return this->getParentItem()->getChildren().indexOf(const_cast<TableItem*>(this));
     }
-    return this->getParentItem()->getChildren().indexOf(const_cast<TableItem*>(this));
+    return 0; // We don't expect this to happen.
 }
 TableItem* TableItem::getParentItem() const
 {

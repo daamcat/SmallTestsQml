@@ -20,8 +20,10 @@ public:
     Q_INVOKABLE QString getRole(int columnNumber);
 
 private:
-    void setUpModelData(const QStringList& stringList, TableItem* rootItem);
+    void setUpModelData(const QStringList& stringList);
     void readRoles(const QString& firstLine);
+    int columnToRoleNumber(int columnNumber) const;
+    int roleNumberToColumn(const int role) const;
     TableItem* m_rootItem;
     QHash<int,QByteArray> m_roles;
 

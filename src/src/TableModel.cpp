@@ -11,50 +11,50 @@ TableModel::TableModel(QObject *parent) : QAbstractTableModel(parent)
     file.open(QIODevice::ReadOnly);
     QStringList dataSplitted = QString(file.readAll()).split("\n");
     file.close();
+    // The first line of the file is headers/roles. We read them:
     readRoles(dataSplitted.at(0));
+    // We remove the headers. The rest is just data:
     dataSplitted.removeFirst();
-    setUpModelData(dataSplitted, m_rootItem);
+    setUpModelData(dataSplitted);
 }
 
 
 int TableModel::rowCount(const QModelIndex& modelIndex) const
 {
+    // In table model, all rows are direct children of root item:
     return m_rootItem->childCount();
 }
 int TableModel::columnCount(const QModelIndex& modelIndex) const
 {
+    // In table model, all items have same number of columns:
     return m_rootItem->columnCount();
 }
 QString TableModel::getRole(int columnNumber)
 {
-    return QString::fromUtf8(m_roles[Qt::UserRole + columnNumber + 1]);
+    return QString::fromUtf8(m_roles[columnToRoleNumber(columnNumber)]);
 }
-
 QVariant TableModel::data(const QModelIndex& index , int role) const
 {
     if (role > Qt::UserRole)
     {
-        // Retrieve column index from role:
-        int columnIndex = role - Qt::ItemDataRole::UserRole - 1;
-
         TableItem *item = m_rootItem->getChildItem(index.row());
         if (item)
         {
+            // Retrieve column index from role:
+            int columnIndex = roleNumberToColumn(role);
             return item->data(columnIndex);
         }
     }
 
     return QVariant();
 }
+
 QHash<int,QByteArray> TableModel::roleNames() const
 {
     return m_roles;
-
-    return { {Qt::ItemDataRole::DisplayRole, "Tag"}};
-    return { {Qt::ItemDataRole::DisplayRole, "display2"}};
 }
 
-void TableModel::setUpModelData(const QStringList& stringList, TableItem* rootItem)
+void TableModel::setUpModelData(const QStringList& stringList)
 {
     for (int i=0; i<stringList.size(); i++)
     {
@@ -83,4 +83,12 @@ void TableModel::readRoles(const QString& firstLine)
     }
     m_rootItem = new TableItem(data);
 
+}
+int TableModel::columnToRoleNumber(int columnNumber) const
+{
+    return Qt::UserRole + columnNumber + 1;
+}
+int TableModel::roleNumberToColumn(const int role) const
+{
+    return role - Qt::ItemDataRole::UserRole - 1;
 }
