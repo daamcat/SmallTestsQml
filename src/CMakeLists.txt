@@ -36,13 +36,13 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -std=c++11 -fstrict-aliasi
 # A list of all header files in current directory, passed as header files of 
 # current project:
 if(NOT DEFINED HEADERS)
-    file(GLOB HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
+    file(GLOB HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
 endif()
 
 # A list of all source files in current directory, passed as source files of 
 # current project:
 if(NOT DEFINED SOURCES)
-    file(GLOB SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+    file(GLOB SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 endif()
 #source_group("Header Files" FILES ${HEADERS})
 #source_group("Source Files" FILES ${SOURCES})
@@ -57,4 +57,8 @@ add_executable(${PROJECT} # executable file name (Equal to project name in here)
 target_link_libraries(${PROJECT}
     Qt5::Widgets
     Qt5::Qml
-    Qt5::Quick)
+    Qt5::Quick
+    Qt5::Charts)
+
+add_definitions(-DSOURCE_DIR="blah")
+

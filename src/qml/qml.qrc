@@ -9,5 +9,7 @@
         <file>ButtonCaptureImageForm.ui.qml</file>
         <file>icons/iconCamera.png</file>
         <file>icons/iconCameraColored.png</file>
+        <file>Graph.qml</file>
+        <file>View.qml</file>
     </qresource>
 </RCC>
