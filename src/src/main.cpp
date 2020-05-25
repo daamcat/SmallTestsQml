@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
     if (engine.rootObjects().isEmpty())
         return -1;
 
+    std::cout<<SOURCE_DIR<<std::endl;
     qDebug() << QString(SOURCE_DIR);
 
     return app.exec();

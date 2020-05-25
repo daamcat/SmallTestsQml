@@ -60,5 +60,4 @@ target_link_libraries(${PROJECT}
     Qt5::Quick
     Qt5::Charts)
 
-add_definitions(-DSOURCE_DIR="blah")
-
+target_compile_definitions(${PROJECT} PRIVATE SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR})
